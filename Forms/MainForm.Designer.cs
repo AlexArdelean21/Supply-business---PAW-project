@@ -54,9 +54,9 @@
             this.groupBox1.Controls.Add(this.deleteBtn1);
             this.groupBox1.Controls.Add(this.EditBtn1);
             this.groupBox1.Controls.Add(this.AddBtn1);
-            this.groupBox1.Location = new System.Drawing.Point(226, 131);
+            this.groupBox1.Location = new System.Drawing.Point(56, 148);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(350, 93);
+            this.groupBox1.Size = new System.Drawing.Size(350, 84);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Goods Management";
@@ -96,7 +96,7 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(588, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(478, 31);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -108,13 +108,13 @@
             this.columnHeader3,
             this.columnHeader4});
             this.lsview1.HideSelection = false;
-            this.lsview1.Location = new System.Drawing.Point(226, 239);
+            this.lsview1.Location = new System.Drawing.Point(12, 491);
             this.lsview1.Name = "lsview1";
-            this.lsview1.Size = new System.Drawing.Size(350, 283);
+            this.lsview1.Size = new System.Drawing.Size(451, 196);
             this.lsview1.TabIndex = 3;
             this.lsview1.UseCompatibleStateImageBehavior = false;
             this.lsview1.View = System.Windows.Forms.View.Details;
-            this.lsview1.SelectedIndexChanged += new System.EventHandler(this.lsview2_SelectedIndexChanged);
+            this.lsview1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lsview1_MouseDoubleClick);
             // 
             // columnHeader1
             // 
@@ -142,30 +142,30 @@
             this.columnHeader5,
             this.columnHeader6});
             this.lsview2.HideSelection = false;
-            this.lsview2.Location = new System.Drawing.Point(12, 239);
+            this.lsview2.Location = new System.Drawing.Point(12, 259);
             this.lsview2.Name = "lsview2";
-            this.lsview2.Size = new System.Drawing.Size(202, 283);
+            this.lsview2.Size = new System.Drawing.Size(451, 210);
             this.lsview2.TabIndex = 5;
             this.lsview2.UseCompatibleStateImageBehavior = false;
             this.lsview2.View = System.Windows.Forms.View.Details;
-            this.lsview2.SelectedIndexChanged += new System.EventHandler(this.lsview1_SelectedIndexChanged);
+            this.lsview2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lsview2_MouseDoubleClick);
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Supplier Name";
-            this.columnHeader5.Width = 102;
+            this.columnHeader5.Width = 154;
             // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "Supplier email";
-            this.columnHeader6.Width = 104;
+            this.columnHeader6.Width = 273;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.deleteBtn2);
             this.groupBox2.Controls.Add(this.EditBtn2);
             this.groupBox2.Controls.Add(this.AddBtn2);
-            this.groupBox2.Location = new System.Drawing.Point(12, 41);
+            this.groupBox2.Location = new System.Drawing.Point(56, 44);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(350, 84);
             this.groupBox2.TabIndex = 6;
@@ -207,14 +207,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.ClientSize = new System.Drawing.Size(588, 533);
+            this.ClientSize = new System.Drawing.Size(478, 704);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.lsview2);
             this.Controls.Add(this.lsview1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStrip1);
+            this.KeyPreview = true;
             this.Name = "MainForm";
             this.Text = "MainForm";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);

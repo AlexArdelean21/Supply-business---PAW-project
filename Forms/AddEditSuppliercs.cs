@@ -25,7 +25,6 @@ namespace Supply_business.Forms
             {
                 txtName.Text = thisSupplier.Name;
                 txtEmail.Text = thisSupplier.Email;
-                Close();
             }
         }
 
@@ -35,7 +34,6 @@ namespace Supply_business.Forms
             {
                 thisSupplier.Name = txtName.Text;
                 thisSupplier.Email = txtEmail.Text;
-                Close();
             }
         }
 
@@ -45,15 +43,6 @@ namespace Supply_business.Forms
             {
                 e.Cancel = true;
                 errorProvider1.SetError((Control)sender, "Name is required");
-            }
-        }
-
-        private void txtEmail_Validating(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtEmail.Text))
-            {
-                e.Cancel = true;
-                errorProvider1.SetError((Control)sender, "Email is required");
             }
         }
     }

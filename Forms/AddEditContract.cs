@@ -28,7 +28,7 @@ namespace Supply_business.Forms
                 thisGood.Description = txtDescription.Text;
                 thisGood.Price =(decimal)numPrice.Value;
                 thisGood.Quantity = (int)numQuantity.Value;
-                Close();
+
             }
         }
 
@@ -40,7 +40,7 @@ namespace Supply_business.Forms
                 txtDescription.Text = thisGood.Description;
                 numPrice.Value = thisGood.Price;
                 numQuantity.Value = thisGood.Quantity;
-                Close();
+
             }
         }
 

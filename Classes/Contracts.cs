@@ -17,6 +17,7 @@ namespace Supply_business.Classes
         public Contracts()
         {
             Goods = new List<Good>();
+            Suppliers = new List<Supplier>();
         }
 
         public Contracts(List<Supplier> supplier, List<Good> goods)

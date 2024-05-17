@@ -63,7 +63,7 @@
             // 
             this.txtName.Location = new System.Drawing.Point(148, 26);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(171, 22);
+            this.txtName.Size = new System.Drawing.Size(204, 22);
             this.txtName.TabIndex = 2;
             this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
             // 
@@ -71,9 +71,8 @@
             // 
             this.txtEmail.Location = new System.Drawing.Point(148, 75);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(171, 22);
+            this.txtEmail.Size = new System.Drawing.Size(204, 22);
             this.txtEmail.TabIndex = 2;
-            this.txtEmail.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmail_Validating);
             // 
             // cancelBtn
             // 
