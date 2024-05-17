@@ -12,12 +12,15 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Supply_business.Classes;
 using Supply_business.Entities;
+using DatabaseProject;
+using System.Data.SqlClient;
 
 namespace Supply_business.Forms
 {
     public partial class MainForm : Form
     {
         public Contracts Contract;
+        DBAccess dBAccess = new DBAccess();
         public MainForm()
         {
             Contract = new Contracts();
@@ -66,6 +69,7 @@ namespace Supply_business.Forms
                 Contract.Goods.Add(good);
                 DisplayContent1();
             }
+
         }
         private void EditBtn_Click(object sender, EventArgs e)
         {
@@ -192,8 +196,46 @@ namespace Supply_business.Forms
                 return;
             }
         }
+
+
         #endregion
 
+        #region Save and Load to DataBase
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var good in Contract.Goods)
+            {
+                string currentName = good.Name;
+                string currentDescription = good.Description;
+                decimal currentPrice = good.Price;
+                int currentQuantity = good.Quantity;
 
+                SqlCommand sqlCommand = new SqlCommand("insert into Goods(Name,Description,Price,Quantity) values(@currentName,@currentDescription,@currentPrice,@currentQuantity)");
+
+                sqlCommand.Parameters.AddWithValue("@currentName", currentName);
+                sqlCommand.Parameters.AddWithValue("@currentDescription", currentDescription);
+                sqlCommand.Parameters.AddWithValue("@currentPrice", currentPrice);
+                sqlCommand.Parameters.AddWithValue("@currentQuantity", currentQuantity);
+
+                int row = dBAccess.executeQuery(sqlCommand);
+                if (row == 1)
+                {
+                    MessageBox.Show("Good added successfully");
+                }
+                else
+                {
+                    MessageBox.Show("Error");
+                } 
+            }
+            #endregion
+
+            // i could make the supplier an enum(amazon, alibalba, shein, etc) and add a field
+            // to the good class that would be the supplier, and then i could add a combobox to the form
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
