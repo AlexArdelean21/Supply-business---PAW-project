@@ -41,6 +41,10 @@
             this.lbQuantity = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.BoxSupplier = new System.Windows.Forms.ComboBox();
+            this.BoxDelivery = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -66,7 +70,7 @@
             // Okbtn
             // 
             this.Okbtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.Okbtn.Location = new System.Drawing.Point(16, 227);
+            this.Okbtn.Location = new System.Drawing.Point(20, 339);
             this.Okbtn.Name = "Okbtn";
             this.Okbtn.Size = new System.Drawing.Size(85, 33);
             this.Okbtn.TabIndex = 4;
@@ -77,7 +81,7 @@
             // cancelBtn
             // 
             this.cancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelBtn.Location = new System.Drawing.Point(318, 227);
+            this.cancelBtn.Location = new System.Drawing.Point(324, 349);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(75, 33);
             this.cancelBtn.TabIndex = 4;
@@ -142,13 +146,51 @@
             // 
             this.errorProvider2.ContainerControl = this;
             // 
+            // BoxSupplier
+            // 
+            this.BoxSupplier.FormattingEnabled = true;
+            this.BoxSupplier.Location = new System.Drawing.Point(174, 203);
+            this.BoxSupplier.Name = "BoxSupplier";
+            this.BoxSupplier.Size = new System.Drawing.Size(200, 24);
+            this.BoxSupplier.TabIndex = 7;
+            // 
+            // BoxDelivery
+            // 
+            this.BoxDelivery.FormattingEnabled = true;
+            this.BoxDelivery.Location = new System.Drawing.Point(174, 246);
+            this.BoxDelivery.Name = "BoxDelivery";
+            this.BoxDelivery.Size = new System.Drawing.Size(200, 24);
+            this.BoxDelivery.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 211);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 16);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Supplier";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 254);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(106, 16);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Delivery Service";
+            // 
             // AddEditContract
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.ClientSize = new System.Drawing.Size(400, 274);
+            this.ClientSize = new System.Drawing.Size(400, 384);
+            this.Controls.Add(this.BoxDelivery);
+            this.Controls.Add(this.BoxSupplier);
             this.Controls.Add(this.lbQuantity);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lbPrice);
             this.Controls.Add(this.lbDescription);
             this.Controls.Add(this.lbGood);
@@ -184,5 +226,9 @@
         private System.Windows.Forms.Label lbQuantity;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.ErrorProvider errorProvider2;
+        private System.Windows.Forms.ComboBox BoxDelivery;
+        private System.Windows.Forms.ComboBox BoxSupplier;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

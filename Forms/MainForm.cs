@@ -31,18 +31,26 @@ namespace Supply_business.Forms
         private void DisplayContent1()
         {
             lsview1.Items.Clear();
-            //Contract.Goods.Sort();
-            
+
+            // Optional: Sort the goods if necessary.
+            // Contract.Goods.Sort((x, y) => x.Name.CompareTo(y.Name));
+
             foreach (var good in Contract.Goods)
             {
                 ListViewItem lvi = new ListViewItem(good.Name);
                 lvi.SubItems.Add(good.Description);
-                lvi.SubItems.Add(good.Price.ToString());
+                lvi.SubItems.Add(good.Price.ToString("C")); // Format price as currency
                 lvi.SubItems.Add(good.Quantity.ToString());
+
+                // Assuming SupplierName and DeliveryService are enums or strings
+                lvi.SubItems.Add(good.supplier.SupplierName.ToString());
+                lvi.SubItems.Add(good.supplier.DeliveryService.ToString());
+
                 lvi.Tag = good;
                 lsview1.Items.Add(lvi);
             }
         }
+
         private void lsview1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             AddEditContract addEditContract = new AddEditContract();
@@ -96,67 +104,6 @@ namespace Supply_business.Forms
         }
         #endregion
 
-        #region Add, edit, delete suppliers
-        private void DisplayContent2()
-        {
-            lsview2.Items.Clear();
-            Contract.Suppliers.Sort();
-
-            foreach (var supplier in Contract.Suppliers)
-            {
-                ListViewItem lvi = new ListViewItem(supplier.Name);
-                lvi.SubItems.Add(supplier.Email);
-                lvi.Tag = supplier;
-                lsview2.Items.Add(lvi);
-            }
-        }
-        private void lsview2_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            AddEditSuppliercs addEditSuppliercs = new AddEditSuppliercs();
-            if (lsview2.SelectedItems.Count == 1)
-            {
-                Supplier supplier = (Supplier)lsview2.SelectedItems[0].Tag as Supplier;
-                addEditSuppliercs.thisSupplier = supplier;
-
-                if (addEditSuppliercs.ShowDialog() == DialogResult.OK)
-                {
-                    DisplayContent2();
-                }
-            }
-        }       
-        private void AddBtn2_Click(object sender, EventArgs e)
-        {
-            AddEditSuppliercs addEditSuppliercs = new AddEditSuppliercs();
-            Supplier supplier = new Supplier();
-            addEditSuppliercs.thisSupplier = supplier;
-
-            if (addEditSuppliercs.ShowDialog() == DialogResult.OK)
-            {
-                Contract.Suppliers.Add(supplier);
-                DisplayContent2();
-            }
-        }
-        private void EditBtn2_Click(object sender, EventArgs e)
-        {
-            AddEditSuppliercs addEditSuppliercs = new AddEditSuppliercs();
-            Supplier supplier = (Supplier)lsview2.SelectedItems[0].Tag as Supplier;
-            addEditSuppliercs.thisSupplier = supplier;
-
-            if (addEditSuppliercs.ShowDialog() == DialogResult.OK)
-            {
-                DisplayContent2();
-            }
-        }
-        private void deleteBtn2_Click(object sender, EventArgs e)
-        {
-            if (lsview2.SelectedItems.Count > 0)
-            {
-                Contract.Suppliers.Remove((Supplier)lsview2.SelectedItems[0].Tag);
-                DisplayContent2();
-            }
-        }
-        #endregion
-
         #region Key shortcuts
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
@@ -175,24 +122,6 @@ namespace Supply_business.Forms
             if (e.Alt && e.Control && e.KeyCode == Keys.D)
             {
                 deleteBtn1_Click(sender, e); // Delete good
-                return;
-            }
-
-            if (e.Alt && e.KeyCode == Keys.A)
-            {
-                AddBtn2_Click(sender, e); // Add supplier
-                return;
-            }
-
-            if (e.Alt && e.KeyCode == Keys.E)
-            {
-                EditBtn2_Click(sender, e); // Edit supplier
-                return;
-            }
-
-            if (e.Alt && e.KeyCode == Keys.D)
-            {
-                deleteBtn2_Click(sender, e); // Delete supplier
                 return;
             }
         }
@@ -229,8 +158,7 @@ namespace Supply_business.Forms
             }
             #endregion
 
-            // i could make the supplier an enum(amazon, alibalba, shein, etc) and add a field
-            // to the good class that would be the supplier, and then i could add a combobox to the form
+            
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

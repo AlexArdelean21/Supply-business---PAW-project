@@ -56,12 +56,6 @@
     <Compile Include="Forms\AddEditContract.Designer.cs">
       <DependentUpon>AddEditContract.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AddEditSuppliercs.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AddEditSuppliercs.Designer.cs">
-      <DependentUpon>AddEditSuppliercs.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,9 +66,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AddEditContract.resx">
       <DependentUpon>AddEditContract.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AddEditSuppliercs.resx">
-      <DependentUpon>AddEditSuppliercs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -6,21 +6,29 @@ using System.Threading.Tasks;
 
 namespace Supply_business.Entities
 {
+    public enum _SupplierName
+    {
+        Amazon,
+        eBay,
+        Shein
+    }
+    public enum _DeliveryService
+    {
+        DHL,
+        FedEx,
+        UPS
+    }
     public class Supplier
     {
-        static public int Id = 0;
-        public string Name { get; set; }
-        public string Email { get; set; }
-
+        public _SupplierName SupplierName { get; set; }
+        public _DeliveryService DeliveryService { get; set; }
         public Supplier()
         {
         }
-
-        public Supplier(string name, string email)
+        public Supplier(_SupplierName supplierName, _DeliveryService deliveryService)
         {
-            Id++;
-            Name = name;
-            Email = email;
+            SupplierName = supplierName;
+            DeliveryService = deliveryService;
         }
     }
 }
