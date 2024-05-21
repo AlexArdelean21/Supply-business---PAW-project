@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using Supply_business.Classes;
 
 namespace DatabaseProject
 {
@@ -17,8 +18,6 @@ namespace DatabaseProject
         public SqlTransaction DbTran;
 
         private static string strConnString = "Data Source=(local);Initial Catalog=PAW_project_Goods&Suppliers;Integrated Security=True";
-
-
 
         public void createConn()
         {
@@ -41,8 +40,6 @@ namespace DatabaseProject
         {
             connection.Close();
         }
-
-
         public int executeDataAdapter(DataTable tblName, string strSelectSql)
         {
             try
@@ -140,5 +137,64 @@ namespace DatabaseProject
                 throw ex;
             }
         }
+
+        public int UpdateGood(Good good)
+        {
+            try
+            {
+                if (connection.State != ConnectionState.Open)
+                {
+                    createConn();
+                }
+
+                string query = "UPDATE Goods SET Name=@Name, Description=@Description, Price=@Price, Quantity=@Quantity, Supplier=@SupplierName, Delivery=@DeliveryService WHERE Id=@Id";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Id", good.GoodId);
+                command.Parameters.AddWithValue("@Name", good.Name);
+                command.Parameters.AddWithValue("@Description", good.Description);
+                command.Parameters.AddWithValue("@Price", good.Price);
+                command.Parameters.AddWithValue("@Quantity", good.Quantity);
+                command.Parameters.AddWithValue("@SupplierName", good.supplier.SupplierName.ToString());
+                command.Parameters.AddWithValue("@DeliveryService", good.supplier.DeliveryService.ToString());
+
+                int rowsAffected = command.ExecuteNonQuery();
+                return rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                closeConn();
+            }
+        }
+
+        public int DeleteGood(int goodId)
+        {
+            try
+            {
+                if (connection.State != ConnectionState.Open)
+                {
+                    createConn();
+                }
+
+                string query = "DELETE FROM Goods WHERE Id=@Id";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Id", goodId);
+
+                int rowsAffected = command.ExecuteNonQuery();
+                return rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                closeConn();
+            }
+        }
+
     }
 }

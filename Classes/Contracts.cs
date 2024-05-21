@@ -19,6 +19,6 @@ namespace Supply_business.Classes
         public Contracts(List<Good> _goods)
         {
             List < Good > Goods = _goods;
-        }   
+        }
     }
 }

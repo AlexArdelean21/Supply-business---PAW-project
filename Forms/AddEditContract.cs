@@ -41,8 +41,6 @@ namespace Supply_business.Forms
                 }
             }
         }
-
-
         public void AddEditContract_Load(object sender, EventArgs e)
         {
             // Populate the ComboBox with enum values
@@ -78,7 +76,6 @@ namespace Supply_business.Forms
                 }
             }
         }
-
         private void txtGood_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtName.Text))
@@ -87,7 +84,6 @@ namespace Supply_business.Forms
                 errorProvider1.SetError((Control)sender, "Good is required");
             }
         }
-
         private void txtDescription_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtDescription.Text))
