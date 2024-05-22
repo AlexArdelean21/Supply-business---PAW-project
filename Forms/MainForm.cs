@@ -29,7 +29,37 @@ namespace Supply_business.Forms
             InitializeComponent();
         }
 
-        #region Add, edit, delete goods
+        #region Displaying data
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            LoadDataFromDatabase();
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadDataFromDatabase();
+        }
+
+        private void LoadDataFromDatabase()
+        {
+            Contract.Goods.Clear();
+            lsview1.Items.Clear();
+            dt.Clear();
+
+            string query = "SELECT * FROM Contracts";
+            dBAccess.readDatathroughAdapter(query, dt);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                Good good = new Good(row);
+                Contract.Goods.Add(good);
+            }
+            DisplayContent1();
+        }
+
+        #endregion
+
+        #region Add, edit, delete contracts
         private void DisplayContent1()
         {
             lsview1.Items.Clear();
@@ -40,8 +70,9 @@ namespace Supply_business.Forms
             {
                 ListViewItem lvi = new ListViewItem(good.Name);
                 lvi.SubItems.Add(good.Description);
-                lvi.SubItems.Add(good.Price.ToString("C")); // Format price as currency
                 lvi.SubItems.Add(good.Quantity.ToString());
+                lvi.SubItems.Add(good.Price.ToString("C")); // Format price as currency 
+
 
                 // Assuming SupplierName and DeliveryService are enums or strings
                 lvi.SubItems.Add(good.supplier.SupplierName.ToString());
@@ -78,62 +109,45 @@ namespace Supply_business.Forms
                 Contract.Goods.Add(good);
                 DisplayContent1();
             }
-
         }
+
         private void EditBtn_Click(object sender, EventArgs e)
         {
-            AddEditContract addEditContract = new AddEditContract();
             if (lsview1.SelectedItems.Count == 1)
             {
                 Good good = (Good)lsview1.SelectedItems[0].Tag;
-                addEditContract.thisGood = good;
+                AddEditContract addEditContract = new AddEditContract
+                {
+                    thisGood = good
+                };
 
                 if (addEditContract.ShowDialog() == DialogResult.OK)
                 {
-                    // Update the database with the new values
-                    DBAccess dBAccess = new DBAccess();
-                    int rowsAffected = dBAccess.UpdateGood(good);
-
-                    if (rowsAffected > 0)
-                    {
-                        // Refresh the ListView to reflect changes
-                        DisplayContent1();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to update the database.");
-                    }
+                    DisplayContent1();
                 }
             }
+            else
+            {
+                MessageBox.Show("Please select an item to edit.");
+            }
         }
-
 
         private void deleteBtn1_Click(object sender, EventArgs e)
         {
             if (lsview1.SelectedItems.Count == 1)
             {
                 Good good = (Good)lsview1.SelectedItems[0].Tag;
-
-                // Confirm deletion
                 var confirmResult = MessageBox.Show("Are you sure to delete this item?", "Confirm Delete", MessageBoxButtons.YesNo);
+
                 if (confirmResult == DialogResult.Yes)
                 {
-                    DBAccess dBAccess = new DBAccess();
-                    int rowsAffected = dBAccess.DeleteGood(good.GoodId);
-
-                    if (rowsAffected > 0)
-                    {
-                        // Remove from the in-memory list
-                        Contract.Goods.Remove(good);
-
-                        // Refresh the ListView to reflect changes
-                        DisplayContent1();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to delete from the database.");
-                    }
+                    Contract.Goods.Remove(good);
+                    DisplayContent1();
                 }
+            }
+            else
+            {
+                MessageBox.Show("Please select an item to delete.");
             }
         }
 
@@ -169,73 +183,54 @@ namespace Supply_business.Forms
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (var good in Contract.Goods)
+            try
             {
-                string currentName = good.Name;
-                string currentDescription = good.Description;
-                decimal currentPrice = good.Price;
-                int currentQuantity = good.Quantity;
-                _SupplierName currentSupplirt = good.supplier.SupplierName;
-                _DeliveryService currentDelivery = good.supplier.DeliveryService;
+                // Clear existing data in the database
+                string deleteQuery = "DELETE FROM Contracts";
+                SqlCommand deleteCommand = new SqlCommand(deleteQuery, dBAccess.connection);
+                dBAccess.createConn();
+                deleteCommand.ExecuteNonQuery();
+                dBAccess.closeConn();
 
-                string query = "IF NOT EXISTS (SELECT 1 FROM Contracts WHERE Name = @currentName AND Description = @currentDescription)" +
-                               "INSERT INTO Contracts(Name, Description, Price, Quantity, Supplier, Delivery) " +
-                               "VALUES (@currentName, @currentDescription, @currentPrice, @currentQuantity, @currentSupplier, @currentDelivery)";
-
-                SqlCommand sqlCommand = new SqlCommand(query);
-                sqlCommand.Parameters.AddWithValue("@currentName", good.Name);
-                sqlCommand.Parameters.AddWithValue("@currentDescription", good.Description);
-                sqlCommand.Parameters.AddWithValue("@currentPrice", good.Price);
-                sqlCommand.Parameters.AddWithValue("@currentQuantity", good.Quantity);
-                sqlCommand.Parameters.AddWithValue("@currentSupplier", good.supplier.SupplierName.ToString());
-                sqlCommand.Parameters.AddWithValue("@currentDelivery", good.supplier.DeliveryService.ToString());
-
-                int rowsAffected = dBAccess.executeQuery(sqlCommand);
-                if (rowsAffected > 0)
+                // Insert current data from ListView
+                foreach (var good in Contract.Goods)
                 {
-                    MessageBox.Show("Good added successfully");
+                    string currentName = good.Name;
+                    string currentDescription = good.Description;
+                    decimal currentPrice = good.Price;
+                    int currentQuantity = good.Quantity;
+                    _SupplierName currentSupplirt = good.supplier.SupplierName;
+                    _DeliveryService currentDelivery = good.supplier.DeliveryService;
+
+                    string insertQuery = "INSERT INTO Contracts (Name, Description, Price, Quantity, Supplier, Delivery) VALUES (@Name, @Description, @Price, @Quantity, @Supplier, @Delivery)";
+                    SqlCommand insertCommand = new SqlCommand(insertQuery, dBAccess.connection);
+
+                    insertCommand.Parameters.AddWithValue("@Name", good.Name);
+                    insertCommand.Parameters.AddWithValue("@Description", good.Description);
+                    insertCommand.Parameters.AddWithValue("@Price", good.Price);
+                    insertCommand.Parameters.AddWithValue("@Quantity", good.Quantity);
+                    insertCommand.Parameters.AddWithValue("@Supplier", good.supplier.SupplierName.ToString());
+                    insertCommand.Parameters.AddWithValue("@Delivery", good.supplier.DeliveryService.ToString());
+
+                    dBAccess.createConn();
+                    insertCommand.ExecuteNonQuery();
+                    dBAccess.closeConn();
                 }
-                else
-                {
-                    MessageBox.Show("Error in adding good");
-                }
+
+                MessageBox.Show("Data saved successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error saving data: " + ex.Message);
             }
         }
 
-        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
-        {   
-            Contract.Goods.Clear();
-            lsview1.Items.Clear();
 
-            string query = "select * from Contracts";
-            dBAccess.readDatathroughAdapter(query, dt);
-
-            foreach (DataRow row in dt.Rows)
-            {
-                //var good = new Good(row);
-
-                //ListViewItem lvi = new ListViewItem(good.Name);
-                //lvi.SubItems.Add(good.Description);
-                //lvi.SubItems.Add(good.Price.ToString("C"));
-                //lvi.SubItems.Add(good.Quantity.ToString());
-
-                //lvi.SubItems.Add(good.supplier.SupplierName.ToString());
-                //lvi.SubItems.Add(good.supplier.DeliveryService.ToString());
-
-                //lvi.Tag = good;
-                //lsview1.Items.Add(lvi);
-
-                Good good = new Good(row);
-                Contract.Goods.Add(good);
-            }
-            DisplayContent1();
-        }
         #endregion
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
-
     }
 }

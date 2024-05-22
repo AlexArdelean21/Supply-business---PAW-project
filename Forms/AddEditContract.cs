@@ -92,5 +92,7 @@ namespace Supply_business.Forms
                 errorProvider1.SetError((Control)sender, "Description is required");
             }
         }
+
+
     }
 }
