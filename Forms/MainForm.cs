@@ -335,6 +335,10 @@ namespace Supply_business.Forms
             Close();
         }
 
-
+        private void Statistics_Click(object sender, EventArgs e)
+        {
+            StatisticsForm statsForm = new StatisticsForm();
+            statsForm.Show();
+        }
     }
 }
