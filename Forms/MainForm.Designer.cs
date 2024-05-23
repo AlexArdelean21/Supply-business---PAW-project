@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.deleteBtn1 = new System.Windows.Forms.Button();
@@ -45,8 +46,24 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.TotalContracts = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.ExportReport = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addContractToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editContractToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteContractToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serializeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deserializeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -54,7 +71,7 @@
             this.groupBox1.Controls.Add(this.deleteBtn1);
             this.groupBox1.Controls.Add(this.EditBtn1);
             this.groupBox1.Controls.Add(this.AddBtn1);
-            this.groupBox1.Location = new System.Drawing.Point(133, 57);
+            this.groupBox1.Location = new System.Drawing.Point(136, 99);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(385, 84);
             this.groupBox1.TabIndex = 0;
@@ -101,7 +118,7 @@
             this.columnHeader5,
             this.columnHeader6});
             this.lsview1.HideSelection = false;
-            this.lsview1.Location = new System.Drawing.Point(12, 147);
+            this.lsview1.Location = new System.Drawing.Point(12, 189);
             this.lsview1.Name = "lsview1";
             this.lsview1.Size = new System.Drawing.Size(616, 196);
             this.lsview1.TabIndex = 3;
@@ -143,7 +160,8 @@
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.infoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(640, 28);
@@ -184,12 +202,128 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // infoToolStripMenuItem
+            // 
+            this.infoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.serializeToolStripMenuItem,
+            this.deserializeToolStripMenuItem});
+            this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(105, 24);
+            this.infoToolStripMenuItem.Text = "Serialization";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TotalContracts});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 403);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(640, 26);
+            this.statusStrip1.TabIndex = 8;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // TotalContracts
+            // 
+            this.TotalContracts.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.TotalContracts.LinkColor = System.Drawing.Color.White;
+            this.TotalContracts.Name = "TotalContracts";
+            this.TotalContracts.Size = new System.Drawing.Size(104, 20);
+            this.TotalContracts.Text = "TotalContracts";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ExportReport,
+            this.toolStripButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(640, 27);
+            this.toolStrip1.TabIndex = 9;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // ExportReport
+            // 
+            this.ExportReport.Image = ((System.Drawing.Image)(resources.GetObject("ExportReport.Image")));
+            this.ExportReport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ExportReport.Name = "ExportReport";
+            this.ExportReport.Size = new System.Drawing.Size(125, 24);
+            this.ExportReport.Text = "Export Report";
+            this.ExportReport.Click += new System.EventHandler(this.ExportReport_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(143, 24);
+            this.toolStripButton1.Text = "toolStripButton1";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addContractToolStripMenuItem,
+            this.editContractToolStripMenuItem,
+            this.deleteContractToolStripMenuItem,
+            this.reloadToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(185, 108);
+            // 
+            // addContractToolStripMenuItem
+            // 
+            this.addContractToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addContractToolStripMenuItem.Image")));
+            this.addContractToolStripMenuItem.Name = "addContractToolStripMenuItem";
+            this.addContractToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.addContractToolStripMenuItem.Text = "Add contract";
+            this.addContractToolStripMenuItem.Click += new System.EventHandler(this.addContractToolStripMenuItem_Click);
+            // 
+            // editContractToolStripMenuItem
+            // 
+            this.editContractToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editContractToolStripMenuItem.Image")));
+            this.editContractToolStripMenuItem.Name = "editContractToolStripMenuItem";
+            this.editContractToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.editContractToolStripMenuItem.Text = "Edit contract";
+            this.editContractToolStripMenuItem.Click += new System.EventHandler(this.editContractToolStripMenuItem_Click);
+            // 
+            // deleteContractToolStripMenuItem
+            // 
+            this.deleteContractToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteContractToolStripMenuItem.Image")));
+            this.deleteContractToolStripMenuItem.Name = "deleteContractToolStripMenuItem";
+            this.deleteContractToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.deleteContractToolStripMenuItem.Text = "Delete contract";
+            this.deleteContractToolStripMenuItem.Click += new System.EventHandler(this.deleteContractToolStripMenuItem_Click_1);
+            // 
+            // reloadToolStripMenuItem
+            // 
+            this.reloadToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("reloadToolStripMenuItem.Image")));
+            this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
+            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.reloadToolStripMenuItem.Text = "Reload ";
+            this.reloadToolStripMenuItem.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
+            // 
+            // serializeToolStripMenuItem
+            // 
+            this.serializeToolStripMenuItem.Name = "serializeToolStripMenuItem";
+            this.serializeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.serializeToolStripMenuItem.Text = "Serialize";
+            this.serializeToolStripMenuItem.Click += new System.EventHandler(this.serializeToolStripMenuItem_Click);
+            // 
+            // deserializeToolStripMenuItem
+            // 
+            this.deserializeToolStripMenuItem.Name = "deserializeToolStripMenuItem";
+            this.deserializeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.deserializeToolStripMenuItem.Text = "Deserialize";
+            this.deserializeToolStripMenuItem.Click += new System.EventHandler(this.deserializeToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.ClientSize = new System.Drawing.Size(640, 364);
+            this.ClientSize = new System.Drawing.Size(640, 429);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.lsview1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
@@ -202,6 +336,11 @@
             this.groupBox1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,5 +364,18 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel TotalContracts;
+        private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton ExportReport;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem addContractToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editContractToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteContractToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reloadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem serializeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deserializeToolStripMenuItem;
     }
 }

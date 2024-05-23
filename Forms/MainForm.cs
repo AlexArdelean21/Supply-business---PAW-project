@@ -56,32 +56,33 @@ namespace Supply_business.Forms
             }
             DisplayContent1();
         }
+        private void DisplayContent1()
+                {
+                    lsview1.Items.Clear();
 
+                    Contract.Goods.Sort((x, y) => x.Name.CompareTo(y.Name));
+
+                    foreach (var good in Contract.Goods)
+                    {
+                        ListViewItem lvi = new ListViewItem(good.Name);
+                        lvi.SubItems.Add(good.Description);
+                        lvi.SubItems.Add(good.Quantity.ToString());
+                        lvi.SubItems.Add(good.Price.ToString("C")); // Format price as currency 
+
+
+                        // Assuming SupplierName and DeliveryService are enums or strings
+                        lvi.SubItems.Add(good.supplier.SupplierName.ToString());
+                        lvi.SubItems.Add(good.supplier.DeliveryService.ToString());
+
+                        lvi.Tag = good;
+                        lsview1.Items.Add(lvi);
+                    }
+                    TotalContracts.Text = "Total Contracts: " + Contract.Goods.Count;
+        }
         #endregion
 
         #region Add, edit, delete contracts
-        private void DisplayContent1()
-        {
-            lsview1.Items.Clear();
-
-            Contract.Goods.Sort((x, y) => x.Name.CompareTo(y.Name));
-
-            foreach (var good in Contract.Goods)
-            {
-                ListViewItem lvi = new ListViewItem(good.Name);
-                lvi.SubItems.Add(good.Description);
-                lvi.SubItems.Add(good.Quantity.ToString());
-                lvi.SubItems.Add(good.Price.ToString("C")); // Format price as currency 
-
-
-                // Assuming SupplierName and DeliveryService are enums or strings
-                lvi.SubItems.Add(good.supplier.SupplierName.ToString());
-                lvi.SubItems.Add(good.supplier.DeliveryService.ToString());
-
-                lvi.Tag = good;
-                lsview1.Items.Add(lvi);
-            }
-        }
+        
 
         private void lsview1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -228,9 +229,112 @@ namespace Supply_business.Forms
 
         #endregion
 
+        #region Context menu
+        private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisplayContent1();
+        }
+        private void addContractToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddBtn_Click(sender, e);
+        }
+        private void editContractToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditBtn_Click(sender, e);
+        }
+        private void deleteContractToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            deleteBtn1_Click(sender, e);
+        }
+
+        #endregion
+
+        #region serialization and export reports
+        private void serializeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Serialize the goods to a file
+                SerializationHelper.SerializeGoods(Contract.Goods, "goods.dat");
+                MessageBox.Show("Data saved successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error saving data: " + ex.Message);
+            }
+        }
+
+        private void deserializeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Deserialize the goods from a file
+                Contract.Goods = SerializationHelper.DeserializeGoods("goods.dat");
+                DisplayContent1();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading data: " + ex.Message);
+            }
+        }
+
+        private string GenerateReportContent()
+        {
+            StringBuilder reportContent = new StringBuilder();
+            reportContent.AppendLine("Goods Report");
+            reportContent.AppendLine("=============");
+            reportContent.AppendLine();
+
+            foreach (var good in Contract.Goods)
+            {
+                reportContent.AppendLine($"Name: {good.Name}");
+                reportContent.AppendLine($"Description: {good.Description}");
+                reportContent.AppendLine($"Price: {good.Price:C}");
+                reportContent.AppendLine($"Quantity: {good.Quantity}");
+                reportContent.AppendLine($"Supplier Name: {good.supplier.SupplierName}");
+                reportContent.AppendLine($"Delivery Service: {good.supplier.DeliveryService}");
+                reportContent.AppendLine("-------------------------------");
+            }
+
+            return reportContent.ToString();
+        }
+
+        private void ExportReportToFile(string reportContent)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "Text Files (*.txt)|*.txt";
+                saveFileDialog.DefaultExt = "txt";
+                saveFileDialog.AddExtension = true;
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        File.WriteAllText(saveFileDialog.FileName, reportContent);
+                        MessageBox.Show("Report exported successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error exporting report: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void ExportReport_Click(object sender, EventArgs e)
+        {
+            string reportContent = GenerateReportContent();
+            ExportReportToFile(reportContent);
+        }
+
+        #endregion
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
+
+
     }
 }

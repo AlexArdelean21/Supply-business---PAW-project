@@ -1,0 +1,17 @@
+Goods Report
+=============
+
+Name: Iphone
+Description: 14 Pro
+Price: $98.00
+Quantity: 2
+Supplier Name: Shein
+Delivery Service: DHL
+-------------------------------
+Name: Laptop
+Description: GIGABYTE
+Price: $100.00
+Quantity: 1
+Supplier Name: eBay
+Delivery Service: FedEx
+-------------------------------

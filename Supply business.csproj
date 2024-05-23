@@ -49,6 +49,7 @@
     <Compile Include="Classes\Contracts.cs" />
     <Compile Include="Classes\DBAccess.cs" />
     <Compile Include="Classes\Good.cs" />
+    <Compile Include="Classes\SerializationHelper.cs" />
     <Compile Include="Classes\Supplier.cs" />
     <Compile Include="Forms\AddEditContract.cs">
       <SubType>Form</SubType>

@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Supply_business.Entities;
+using System.ComponentModel;
 
 namespace Supply_business.Classes
 {
-
+    [Serializable]
     public class Good
     {   static public int Id = 0;
         public int GoodId { get; set; }
