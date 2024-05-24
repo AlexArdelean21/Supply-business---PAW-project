@@ -77,11 +77,12 @@ namespace Supply_business.Forms
                 if (value > maxValue) maxValue = value;
             }
 
+            string color = "131, 77, 155";
             // Draw bars
             for (int i = 0; i < values.Length; i++)
-            {
+            { 
                 int barHeight = (values[i] * maxBarHeight) / maxValue;
-                g.FillRectangle(Brushes.Blue, i * barWidth, chartHeight - barHeight, barWidth - 10, barHeight);
+                g.FillRectangle(Brushes.Purple, i * barWidth, chartHeight - barHeight, barWidth - 10, barHeight);
                 g.DrawString(values[i].ToString(), this.Font, Brushes.Black, i * barWidth, chartHeight - barHeight - 20);
                 g.DrawString(categories[i], this.Font, Brushes.Black, i * barWidth, chartHeight - 20);
             }
@@ -89,6 +90,16 @@ namespace Supply_business.Forms
             // Draw axes
             g.DrawLine(Pens.Black, 0, chartHeight - 1, chartWidth, chartHeight - 1); // X-axis
             g.DrawLine(Pens.Black, 0, 0, 0, chartHeight); // Y-axis
+        }
+
+        private void bunifuGradientPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -29,26 +29,31 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEditContract));
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.Okbtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
             this.numQuantity = new System.Windows.Forms.NumericUpDown();
-            this.lbGood = new System.Windows.Forms.Label();
-            this.lbDescription = new System.Windows.Forms.Label();
-            this.lbPrice = new System.Windows.Forms.Label();
             this.numPrice = new System.Windows.Forms.NumericUpDown();
-            this.lbQuantity = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.BoxSupplier = new System.Windows.Forms.ComboBox();
             this.BoxDelivery = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.bunifuGradientPanel1 = new Bunifu.Framework.UI.BunifuGradientPanel();
+            this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.bunifuCustomLabel3 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.bunifuCustomLabel4 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.bunifuCustomLabel5 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.bunifuCustomLabel6 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.bunifuCustomLabel2 = new Bunifu.Framework.UI.BunifuCustomLabel();
             ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
+            this.bunifuGradientPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtName
@@ -87,6 +92,7 @@
             this.cancelBtn.TabIndex = 4;
             this.cancelBtn.Text = "Cancel";
             this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // numQuantity
             // 
@@ -95,48 +101,12 @@
             this.numQuantity.Size = new System.Drawing.Size(200, 22);
             this.numQuantity.TabIndex = 3;
             // 
-            // lbGood
-            // 
-            this.lbGood.AutoSize = true;
-            this.lbGood.Location = new System.Drawing.Point(17, 37);
-            this.lbGood.Name = "lbGood";
-            this.lbGood.Size = new System.Drawing.Size(90, 16);
-            this.lbGood.TabIndex = 6;
-            this.lbGood.Text = "Product name";
-            // 
-            // lbDescription
-            // 
-            this.lbDescription.AutoSize = true;
-            this.lbDescription.Location = new System.Drawing.Point(17, 79);
-            this.lbDescription.Name = "lbDescription";
-            this.lbDescription.Size = new System.Drawing.Size(75, 16);
-            this.lbDescription.TabIndex = 6;
-            this.lbDescription.Text = "Description";
-            // 
-            // lbPrice
-            // 
-            this.lbPrice.AutoSize = true;
-            this.lbPrice.Location = new System.Drawing.Point(17, 123);
-            this.lbPrice.Name = "lbPrice";
-            this.lbPrice.Size = new System.Drawing.Size(84, 16);
-            this.lbPrice.TabIndex = 6;
-            this.lbPrice.Text = "Price per unit";
-            // 
             // numPrice
             // 
             this.numPrice.Location = new System.Drawing.Point(174, 117);
             this.numPrice.Name = "numPrice";
             this.numPrice.Size = new System.Drawing.Size(200, 22);
             this.numPrice.TabIndex = 3;
-            // 
-            // lbQuantity
-            // 
-            this.lbQuantity.AutoSize = true;
-            this.lbQuantity.Location = new System.Drawing.Point(17, 166);
-            this.lbQuantity.Name = "lbQuantity";
-            this.lbQuantity.Size = new System.Drawing.Size(55, 16);
-            this.lbQuantity.TabIndex = 6;
-            this.lbQuantity.Text = "Quantity";
             // 
             // errorProvider1
             // 
@@ -162,23 +132,91 @@
             this.BoxDelivery.Size = new System.Drawing.Size(200, 24);
             this.BoxDelivery.TabIndex = 7;
             // 
-            // label1
+            // bunifuElipse1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 211);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 16);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Supplier";
+            this.bunifuElipse1.ElipseRadius = 20;
+            this.bunifuElipse1.TargetControl = this;
             // 
-            // label2
+            // bunifuGradientPanel1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 254);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 16);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Delivery Service";
+            this.bunifuGradientPanel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuGradientPanel1.BackgroundImage")));
+            this.bunifuGradientPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bunifuGradientPanel1.Controls.Add(this.bunifuCustomLabel2);
+            this.bunifuGradientPanel1.Controls.Add(this.bunifuCustomLabel6);
+            this.bunifuGradientPanel1.Controls.Add(this.bunifuCustomLabel5);
+            this.bunifuGradientPanel1.Controls.Add(this.bunifuCustomLabel4);
+            this.bunifuGradientPanel1.Controls.Add(this.bunifuCustomLabel3);
+            this.bunifuGradientPanel1.Controls.Add(this.bunifuCustomLabel1);
+            this.bunifuGradientPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bunifuGradientPanel1.GradientBottomLeft = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(104)))), ((int)(((byte)(220)))));
+            this.bunifuGradientPanel1.GradientBottomRight = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(78)))), ((int)(((byte)(214)))));
+            this.bunifuGradientPanel1.GradientTopLeft = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(78)))), ((int)(((byte)(214)))));
+            this.bunifuGradientPanel1.GradientTopRight = System.Drawing.Color.FromArgb(((int)(((byte)(131)))), ((int)(((byte)(77)))), ((int)(((byte)(155)))));
+            this.bunifuGradientPanel1.Location = new System.Drawing.Point(0, 0);
+            this.bunifuGradientPanel1.Name = "bunifuGradientPanel1";
+            this.bunifuGradientPanel1.Quality = 10;
+            this.bunifuGradientPanel1.Size = new System.Drawing.Size(400, 384);
+            this.bunifuGradientPanel1.TabIndex = 8;
+            // 
+            // bunifuCustomLabel1
+            // 
+            this.bunifuCustomLabel1.AutoSize = true;
+            this.bunifuCustomLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuCustomLabel1.Location = new System.Drawing.Point(21, 37);
+            this.bunifuCustomLabel1.Name = "bunifuCustomLabel1";
+            this.bunifuCustomLabel1.Size = new System.Drawing.Size(93, 16);
+            this.bunifuCustomLabel1.TabIndex = 0;
+            this.bunifuCustomLabel1.Text = "Product Name";
+            // 
+            // bunifuCustomLabel3
+            // 
+            this.bunifuCustomLabel3.AutoSize = true;
+            this.bunifuCustomLabel3.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuCustomLabel3.Location = new System.Drawing.Point(21, 123);
+            this.bunifuCustomLabel3.Name = "bunifuCustomLabel3";
+            this.bunifuCustomLabel3.Size = new System.Drawing.Size(84, 16);
+            this.bunifuCustomLabel3.TabIndex = 2;
+            this.bunifuCustomLabel3.Text = "Price per unit";
+            // 
+            // bunifuCustomLabel4
+            // 
+            this.bunifuCustomLabel4.AutoSize = true;
+            this.bunifuCustomLabel4.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuCustomLabel4.Location = new System.Drawing.Point(21, 166);
+            this.bunifuCustomLabel4.Name = "bunifuCustomLabel4";
+            this.bunifuCustomLabel4.Size = new System.Drawing.Size(55, 16);
+            this.bunifuCustomLabel4.TabIndex = 3;
+            this.bunifuCustomLabel4.Text = "Quantity";
+            // 
+            // bunifuCustomLabel5
+            // 
+            this.bunifuCustomLabel5.AutoSize = true;
+            this.bunifuCustomLabel5.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuCustomLabel5.Location = new System.Drawing.Point(21, 211);
+            this.bunifuCustomLabel5.Name = "bunifuCustomLabel5";
+            this.bunifuCustomLabel5.Size = new System.Drawing.Size(49, 16);
+            this.bunifuCustomLabel5.TabIndex = 4;
+            this.bunifuCustomLabel5.Text = "Suplier";
+            // 
+            // bunifuCustomLabel6
+            // 
+            this.bunifuCustomLabel6.AutoSize = true;
+            this.bunifuCustomLabel6.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuCustomLabel6.Location = new System.Drawing.Point(21, 254);
+            this.bunifuCustomLabel6.Name = "bunifuCustomLabel6";
+            this.bunifuCustomLabel6.Size = new System.Drawing.Size(104, 16);
+            this.bunifuCustomLabel6.TabIndex = 5;
+            this.bunifuCustomLabel6.Text = "Delivery service";
+            // 
+            // bunifuCustomLabel2
+            // 
+            this.bunifuCustomLabel2.AutoSize = true;
+            this.bunifuCustomLabel2.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuCustomLabel2.Location = new System.Drawing.Point(21, 76);
+            this.bunifuCustomLabel2.Name = "bunifuCustomLabel2";
+            this.bunifuCustomLabel2.Size = new System.Drawing.Size(75, 16);
+            this.bunifuCustomLabel2.TabIndex = 6;
+            this.bunifuCustomLabel2.Text = "Description";
             // 
             // AddEditContract
             // 
@@ -188,18 +226,14 @@
             this.ClientSize = new System.Drawing.Size(400, 384);
             this.Controls.Add(this.BoxDelivery);
             this.Controls.Add(this.BoxSupplier);
-            this.Controls.Add(this.lbQuantity);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lbPrice);
-            this.Controls.Add(this.lbDescription);
-            this.Controls.Add(this.lbGood);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.numPrice);
             this.Controls.Add(this.Okbtn);
             this.Controls.Add(this.numQuantity);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.txtName);
+            this.Controls.Add(this.bunifuGradientPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AddEditContract";
             this.Text = "Add/ Edit Contract";
             this.Load += new System.EventHandler(this.AddEditContract_Load);
@@ -207,6 +241,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
+            this.bunifuGradientPanel1.ResumeLayout(false);
+            this.bunifuGradientPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,16 +255,19 @@
         private System.Windows.Forms.Button Okbtn;
         private System.Windows.Forms.Button cancelBtn;
         private System.Windows.Forms.NumericUpDown numQuantity;
-        private System.Windows.Forms.Label lbGood;
-        private System.Windows.Forms.Label lbDescription;
-        private System.Windows.Forms.Label lbPrice;
         private System.Windows.Forms.NumericUpDown numPrice;
-        private System.Windows.Forms.Label lbQuantity;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.ErrorProvider errorProvider2;
         private System.Windows.Forms.ComboBox BoxDelivery;
         private System.Windows.Forms.ComboBox BoxSupplier;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
+        private Bunifu.Framework.UI.BunifuGradientPanel bunifuGradientPanel1;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel1;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel6;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel5;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel4;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel3;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel2;
     }
 }

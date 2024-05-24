@@ -120,7 +120,26 @@
   <metadata name="errorProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="bunifuGradientPanel1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAFeSURBVChTDcrbThNBAIDhvuFMZ6ezM90XMPGCRBOMGjwi
+        aBW1ilpFUlFEFBSDBqMCbbfdbs/nk0/zu9/1l8oF/1gLZtwNxtwMBlwPulwJWlzOxixla1zMVriQPSeV
+        dws23JScG7Hm+txxHW64JtdczLKrcclVWHJJLNgFm3ZK3o7YsH0e2A73bJPbNmbF1rhqKyzbJBb9BVv+
+        lII/YtPv89Tv8Mhvct/UWTVVbpkyK+aM1J5Z8N5MKZoRW6bPK9PhuWnyJFPnYabKeqbMaiaJX/Wcz3rC
+        Rz1kR/fY1m3e6AYvdZ1nuspjXSank/jTm/Pdm3DoDdn3eux6bXa8Btsq4rUKeaFK5NUpqb9qzi814Yca
+        cqR6HKg2+6rBbjriXTrkbbpEIZ3EUM44l2P+yAEnssuxbHEkYw5kxCcZ8kGWKMokNsWMSIypiAFnostv
+        0eJExByLiG8i5IsosSdO+Q9llg8o+MGeDQAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="errorProvider2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>172, 17</value>
+  </metadata>
+  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>327, 17</value>
+  </metadata>
+  <metadata name="bunifuElipse1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>522, 21</value>
   </metadata>
 </root>

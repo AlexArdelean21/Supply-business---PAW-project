@@ -57,32 +57,32 @@ namespace Supply_business.Forms
             DisplayContent1();
         }
         private void DisplayContent1()
-                {
-                    lsview1.Items.Clear();
+        {
+            lsview1.Items.Clear();
 
-                    Contract.Goods.Sort((x, y) => x.Name.CompareTo(y.Name));
+            Contract.Goods.Sort((x, y) => x.Name.CompareTo(y.Name));
 
-                    foreach (var good in Contract.Goods)
-                    {
-                        ListViewItem lvi = new ListViewItem(good.Name);
-                        lvi.SubItems.Add(good.Description);
-                        lvi.SubItems.Add(good.Quantity.ToString());
-                        lvi.SubItems.Add(good.Price.ToString("C")); // Format price as currency 
+            foreach (var good in Contract.Goods)
+            {
+                ListViewItem lvi = new ListViewItem(good.Name);
+                lvi.SubItems.Add(good.Description);
+                lvi.SubItems.Add(good.Quantity.ToString());
+                lvi.SubItems.Add(good.Price.ToString("C")); // Format price as currency 
 
 
-                        // Assuming SupplierName and DeliveryService are enums or strings
-                        lvi.SubItems.Add(good.supplier.SupplierName.ToString());
-                        lvi.SubItems.Add(good.supplier.DeliveryService.ToString());
+                // Assuming SupplierName and DeliveryService are enums or strings
+                lvi.SubItems.Add(good.supplier.SupplierName.ToString());
+                lvi.SubItems.Add(good.supplier.DeliveryService.ToString());
 
-                        lvi.Tag = good;
-                        lsview1.Items.Add(lvi);
-                    }
-                    TotalContracts.Text = "Total Contracts: " + Contract.Goods.Count;
+                lvi.Tag = good;
+                lsview1.Items.Add(lvi);
+            }
+            TotalContracts.Text = "Total Contracts: " + Contract.Goods.Count;
         }
         #endregion
 
         #region Add, edit, delete contracts
-        
+
 
         private void lsview1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -330,6 +330,7 @@ namespace Supply_business.Forms
 
         #endregion
 
+        #region random
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
@@ -340,5 +341,42 @@ namespace Supply_business.Forms
             StatisticsForm statsForm = new StatisticsForm();
             statsForm.Show();
         }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void infoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Info info = new Info();
+            info.Show();
+        }
+
+        private bool dragging = false;
+        private Point dragCursorPoint;
+        private Point dragFormPoint;
+
+        private void MainForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            dragging = true;
+            dragCursorPoint = Cursor.Position;
+            dragFormPoint = this.Location;
+        }
+
+        private void MainForm_MouseMove_1(object sender, MouseEventArgs e)
+        {
+            if (dragging)
+            {
+                Point diff = Point.Subtract(Cursor.Position, new Size(dragCursorPoint));
+                this.Location = Point.Add(dragFormPoint, new Size(diff));
+            }
+        }
+
+        private void MainForm_MouseUp_1(object sender, MouseEventArgs e)
+        {
+            dragging = false;
+        }
+        #endregion
     }
 }

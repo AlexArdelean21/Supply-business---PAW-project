@@ -93,6 +93,9 @@ namespace Supply_business.Forms
             }
         }
 
-
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
